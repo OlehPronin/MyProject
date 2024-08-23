@@ -9,4 +9,15 @@ class Article extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function user() 
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }

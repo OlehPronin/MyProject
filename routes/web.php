@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/blog', [BlogController::class, 'index']);
 
@@ -26,3 +27,8 @@ Route::get('/shop/{id}', [ShopController::class, 'show']); // Для отобр�
 
 
 // Route::resource('/articles', ArticlesController::class);
+
+Auth::routes();
+
+Route::get('/user', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

@@ -4,22 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateArticlesTable extends Migration
 {
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('summary');
-            $table->decimal('price', 8, 2);
-            $table->string('category');
-            $table->timestamps(); // Поля created_at и updated_at
+            $table->string('title');
+            $table->text('anons');
+            $table->text('text');
+            $table->unsignedBigInteger('user_id'); // Убедитесь, что поле существует
+            $table->foreign('user_id')->references('id')->on('users'); // Внешний ключ
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('articles'); // Исправлено имя таблицы
     }
 }
