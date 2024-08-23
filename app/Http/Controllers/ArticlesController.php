@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,7 +57,7 @@ class ArticlesController extends Controller
 
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::with('comments.user')->findOrFail($id);
         return view('articles.show', compact('article'));
     }
 
@@ -124,5 +125,28 @@ class ArticlesController extends Controller
 
         $article->delete();
         return redirect('/')->with('success', 'Статья была удалена');
+    }
+
+    public function storeComment(Request $request, $articleId)
+    {
+        // Валидация данных
+        $request->validate([
+            'comment' => 'required|string|max:255',
+        ]);
+
+        // Найти статью, к которой добавляется комментарий
+        $article = Article::findOrFail($articleId);
+
+        // Создать новый комментарий
+        $comment = new Comment();
+        $comment->content = $request->input('comment');
+        $comment->article_id = $article->id;
+        $comment->user_id = auth()->user()->id; // Связь с автором комментария
+
+        // Сохранить комментарий в базе данных
+        $comment->save();
+
+        // Перенаправить пользователя обратно на статью
+        return redirect()->route('articles.show', ['id' => $articleId])->with('success', 'Комментарий успешно добавлен!');
     }
 }

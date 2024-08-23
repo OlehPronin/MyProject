@@ -20,13 +20,13 @@
             <a href="/shop" class="tv-btn">Товары</a>
 
             @guest
-                <a href="/login" class=lg-btn>Войти</a>
-                <a href="/register" class=rg-btn>Регистрация</a>
+                <a href="/login" class="lg-btn">Войти</a>
+                <a href="/register" class="rg-btn">Регистрация</a>
             @else
-                <a href="/user" class="us-btn" >{{ Auth::user()->name }}</a>
+                <a href="/user" class="us-btn">{{ Auth::user()->name }}</a>
                 <a href="/article/add" class="cl-btn">Добавить статью</a>
 
-                <form action="/logout" method="POST">
+                <form action="/logout" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="logout-button">Выйти</button>
                 </form>

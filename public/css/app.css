@@ -388,6 +388,49 @@ a:hover {
   margin-bottom: 10px;
 }
 
+/* resources/css/app.scss */
+/* Стили для формы комментариев */
+form {
+  margin-top: 20px;
+}
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+form button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #6a0dad; /* Пурпурный цвет */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #5c0a9a;
+}
+
+/* Стили для списка комментариев */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+ul li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+ul li p {
+  margin: 0;
+}
+ul li strong {
+  color: #333;
+}
+ul li small {
+  color: #666;
+}
+
 footer {
   text-align: center;
   margin-top: 100px;

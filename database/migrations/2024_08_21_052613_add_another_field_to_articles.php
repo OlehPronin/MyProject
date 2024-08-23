@@ -1,24 +1,29 @@
 <?php
 
-// Пример миграции для добавления столбца
+// 2024_08_21_052613_add_another_field_to_articles.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddAnotherFieldToArticles extends Migration
 {
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->string('image', 170)->nullable(); // Или укажите позицию, если требуется
+            // Проверяем, существует ли столбец, перед добавлением
+            if (!Schema::hasColumn('articles', 'another_field')) {
+                $table->string('another_field')->nullable();
+            }
         });
     }
 
     public function down()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropColumn('image');
+            // Удаляем столбец, если он существует
+            if (Schema::hasColumn('articles', 'another_field')) {
+                $table->dropColumn('another_field');
+            }
         });
     }
-};
-
+}
